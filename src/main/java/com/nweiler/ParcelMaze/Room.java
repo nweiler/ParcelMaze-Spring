@@ -1,6 +1,5 @@
 package com.nweiler.ParcelMaze;
 
-
 //Code for rooms in the Maze. Borrows code from Zuul 
 import java.util.Set;
 import java.util.HashMap;
@@ -21,7 +20,7 @@ public class Room
  private boolean containsParcel;
  public boolean hasAMonster;
  private static Random rand = new Random();
- private static User myUser;
+ private User myUser;
  private Maze maze;
  
  /**
@@ -30,12 +29,12 @@ public class Room
   * @param imageFilePath The path and filename for the image.
   * @param myUser The instance of the user class created at the beginning of the maze.
   */
- public Room(String description, String imageFilePath, User myUser, Maze maze)
+ public Room(String description, String imageFilePath, User myUser)
  {
      this.myUser = myUser;
      this.description = description;
      this.imageFilePath = imageFilePath;
-     this.maze = maze;
+     this.maze = Maze.getInstance();
      exits = new HashMap<String, Room>();
 
      int x = rand.nextInt(2); // randomly generate parcel (or not)
@@ -52,7 +51,7 @@ public class Room
      }
      else if(x==1){
          hasAMonster = true;
-         Maze.increaseMonsterCount();
+         maze.increaseMonsterCount();
      }
  }
  
@@ -63,7 +62,7 @@ public class Room
  public void startAFight(){
      Monster myMonster = new Monster();
      Fight myFight = new Fight();
-     hasAMonster = myFight.fight(myUser, myMonster, maze);
+     hasAMonster = myFight.fight(myUser, myMonster);
      if(hasAMonster == false)
      {
          System.out.println(getExitString());
@@ -95,7 +94,7 @@ public class Room
          String imageFilePath = in.nextLine();
          String exitPairs = in.nextLine();
          String description = FileUtil.readParagraph(in);
-         rooms.put(name, new Room(description, imageFilePath, myUser, maze));
+         rooms.put(name, new Room(description, imageFilePath, myUser));
          exitStrings.put(name, exitPairs);
       
      }

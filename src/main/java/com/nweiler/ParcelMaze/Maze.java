@@ -1,7 +1,7 @@
 package com.nweiler.ParcelMaze;
 
 import java.util.HashMap;
-import java.util.Scanner;
+// import java.util.Scanner;
 
 /**
  * For our game "The Parcel Maze of Doom!" navigation through the maze is strictly text based.
@@ -17,25 +17,24 @@ import java.util.Scanner;
 
 public class Maze 
 {
-	private static Maze instance;
+    private static Maze instance;
     private Room currentRoom;
     private HashMap<String, Room> rooms; //allows all rooms to be found by name
     public User myUser = new User();
     private static int monsterCount = 0;
-    private Maze maze;
     
     /**
-     * Create the game and initialise its internal map.
+     * Create the game and initialize its internal map.
      */
     private Maze() 
     {
-        rooms = Room.createRooms("com/nweiler/ParcelMaze/roomData.txt", myUser, maze);
+        rooms = Room.createRooms("com/nweiler/ParcelMaze/roomData.txt", myUser, Maze.getInstance());
         currentRoom = rooms.get("outside");
     }
     
     public static synchronized Maze getInstance() {
       	if(instance == null) {
-      		instance = new Maze();
+            instance = new Maze();
       	}
       	
       	return instance;
@@ -61,7 +60,7 @@ public class Maze
         // execute them until the game is over.
   
         boolean finished = false;       
-        while (!finished) {
+        while(!finished) {
             
             while(monsterCount != 0 && !finished)
             {
@@ -136,7 +135,7 @@ public class Maze
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("health")) {
-            System.out.println("Your current health is " + myUser.checkHealth());
+            System.out.println("Your current health is " + myUser.getHealth());
 
         }
         else if (commandWord.equals("monsters")){
@@ -215,30 +214,15 @@ public class Maze
         }
     }
     
-    /**
-     * Used at maze instantiation to count the total
-     * number of monsters in the maze.
-     */
-    public static void increaseMonsterCount()
-    {
+    public void increaseMonsterCount() { 
         monsterCount ++;
     }
     
-    /**
-     * This is reduced each time a monster is defeated.
-     * This gives the user a message when all the monsters
-     * have been defeated.
-     */
-    public static void reduceMonsterCount()
-    {
-        monsterCount --;
+    public void reduceMonsterCount() { 
+        monsterCount --; 
     }
     
-    /**
-     * Prints a message showing the number of monsters remaining.
-     */
-    public static void printMonsterCount()
-    {
-        System.out.println("There are " + monsterCount + " monsters left in the castle!");
+    public void printMonsterCount() { 
+        System.out.println("There are " + monsterCount + " monsters left in the castle!"); 
     }
 }

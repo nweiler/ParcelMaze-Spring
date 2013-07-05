@@ -1,20 +1,18 @@
 package com.nweiler.ParcelMaze;
 
-
 import java.util.Random;
-
 
 /**
  * The class representing the player. The user's attack strength is constant throughout the game.
  * Health starts at 100 and may decrease as the player encounters monsters.
  */
 
-public class User
+public class User implements Actor
 {
-    private static int userHealth;
-    private static int bonus;
-    private static Random rand = new Random();
-    private static String name;
+    private int userHealth;
+    // private int bonus;
+    private Random rand = new Random();
+    private String name;
     
     /**
      * Create an instance of the User object
@@ -49,7 +47,7 @@ public class User
      * Returns user health
      * @return User's health
      */
-    public int checkHealth()
+    public int getHealth()
     {
         return userHealth;
     }
@@ -58,7 +56,7 @@ public class User
      * Checks the user attack strength
      * @return User's attack strength
      */
-    public int checkAttack()
+    public int attack()
     {
         return rand.nextInt(25 + 1);
     }
