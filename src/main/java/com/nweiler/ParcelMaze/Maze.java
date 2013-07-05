@@ -17,28 +17,33 @@ import java.util.Scanner;
 
 public class Maze 
 {
+	private static Maze instance;
     private Room currentRoom;
     private HashMap<String, Room> rooms; //allows all rooms to be found by name
     public User myUser = new User();
     private static int monsterCount = 0;
     private Maze maze;
     
-    /** 
-     * Make a Game playable from the command line. 
-     */
-    public static void main(String[] args)
-    {
-        Maze maze = new Maze();
-        maze.play();
-    }
-        
     /**
      * Create the game and initialise its internal map.
      */
-    public Maze() 
+    private Maze() 
     {
         rooms = Room.createRooms("com/nweiler/ParcelMaze/roomData.txt", myUser, maze);
         currentRoom = rooms.get("outside");
+    }
+    
+    public static synchronized Maze getInstance() {
+      	if(instance == null) {
+      		instance = new Maze();
+      	}
+      	
+      	return instance;
+    }
+    
+    // This prevents duplicate instances via cloning (highly unlikely)
+    public Object clone() throws CloneNotSupportedException {
+    	throw new CloneNotSupportedException();
     }
 
     /**

@@ -68,7 +68,7 @@ public class User
      */
     public void die()
     {
-        Maze maze = new Maze();
+        Maze maze = Maze.getInstance();
         maze.play();
     }
     
