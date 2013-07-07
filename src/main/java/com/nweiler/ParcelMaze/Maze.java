@@ -1,7 +1,7 @@
 package com.nweiler.ParcelMaze;
 
 import java.util.HashMap;
-// import java.util.Scanner;
+import java.util.Scanner;
 
 /**
  * For our game "The Parcel Maze of Doom!" navigation through the maze is strictly text based.
@@ -15,67 +15,83 @@ import java.util.HashMap;
  * A parcel increases the player's health.
  */
 
-public class Maze 
-{
+public class Maze {
     private static Maze instance;
     private Room currentRoom;
-    private HashMap<String, Room> rooms; //allows all rooms to be found by name
-    public User myUser = new User();
-    private static int monsterCount = 0;
+    private HashMap<String, Room> rooms;
+    private HashMap<String, String> exitStrings;
+    private Actor myUser = new User();
+    private int monsterCount = 0;
     
     /**
-     * Create the game and initialize its internal map.
+     * Private constructor for singleton
      */
-    private Maze() 
-    {
-        rooms = Room.createRooms("com/nweiler/ParcelMaze/roomData.txt", myUser, Maze.getInstance());
-        currentRoom = rooms.get("outside");
+    private Maze() {
+        RoomFactory roomFactory = new RoomFactory();
     }
     
     public static synchronized Maze getInstance() {
-      	if(instance == null) {
+        if(instance == null) {
             instance = new Maze();
       	}
-      	
       	return instance;
     }
     
-    // This prevents duplicate instances via cloning (highly unlikely)
+     // This prevents duplicate instances via cloning (highly unlikely)
     public Object clone() throws CloneNotSupportedException {
     	throw new CloneNotSupportedException();
     }
 
-    /**
-     *  Main play routine.  Loops until end of play.
-     */
-    public void play() 
-    {            
+    public void createRooms(String roomDataFile) {
+        RoomFactory roomFactory = new RoomFactory();
+        Scanner in = ResourceUtil.openFileScanner(roomDataFile);
+        if(in == null) {
+            System.out.println("File not found: " + roomDataFile);
+        }
+        rooms = new HashMap<String, Room>();
+        exitStrings = new HashMap<String, String>();
+        while (in.hasNext()) {
+            String name = in.nextLine();
+            String imageFilePath = in.nextLine();
+            String exitPairs = in.nextLine();
+            String description = FileUtil.readParagraph(in);
+            rooms.put(name, roomFactory.createRoom("room", description, imageFilePath, false, false));
+            exitStrings.put(name, exitPairs);
+        }
+        in.close();
+        for(String name: rooms.keySet()) {
+            Room room = rooms.get(name);
+            Scanner lineIn = new Scanner(exitStrings.get(name));
+            while (lineIn.hasNext()) {
+                String direction = lineIn.next();
+                String neighbor = lineIn.next();
+                room.setExit(direction, rooms.get(neighbor));
+            }
+        }   
+    }
+        
+    public void play() {
+        currentRoom = rooms.get("outside");
         StdDraw.clear();
         printWelcome();
         currentRoom.displayImage();
         currentRoom.displayDesc();
         Command command;
         
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-  
         boolean finished = false;       
         while(!finished) {
             
-            while(monsterCount != 0 && !finished)
-            {
+            while(monsterCount != 0 && !finished) {
                 command = Parser.getCommand();
                 finished = processCommand(command);
             }
             
-            if(currentRoom.getImageFilePath().equals("castle.jpg"))
-            {
+            if(currentRoom.getImageFilePath().equals("castle.jpg")) {
                 finished = true;
             }
             
-            else
-            {
-                while(!finished){
+            else {
+                while(!finished) {
                     System.out.println("You have defeated all of the monters but you must find your way back to the entrance!");
                     command = Parser.getCommand();
                     finished = processCommand(command);
@@ -86,12 +102,12 @@ public class Maze
             }
         }
         
-        if(monsterCount == 0){
+        if(monsterCount == 0) {
             System.out.println("You have defeated all of the monters and escaped the castle. YOU WIN!!!!!!");   
             System.out.println("Thank you for playing.  Goodbye."); 
             StdDraw.text(.5, .5, "YOU WIN!!!!");
         }
-        else{
+        else {
             System.out.println("Play again soon!");
         }
     }
@@ -99,13 +115,10 @@ public class Maze
     /**
      * Print out the opening message for the player.
      */
-    private void printWelcome()
-    {
-        System.out.println();
-        System.out.println("You are standing outside a large castle.");
+    private void printWelcome() {
+        System.out.println("\nYou are standing outside a large castle.");
         System.out.println("You must defeat the monsters inside and return from whence you came...");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println();
+        System.out.println("Type 'help' if you need help.\n");
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -115,8 +128,7 @@ public class Maze
      *      The command to be processed.
      * @return True if the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command) 
-    {
+    private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
@@ -129,7 +141,7 @@ public class Maze
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            goRoom(command);
+            myUser.goRoom(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -145,15 +157,12 @@ public class Maze
         return wantToQuit;
     }
 
-    // implementations of user commands:
-
     /**
      * Print out some help information.
      * Here we print a cryptic message and a list of the 
      * command words.
      */
-    private void printHelp() 
-    {
+    private void printHelp() {
         System.out.println("You are trapped within the castle.");
         System.out.println("You must find the parcels and defeat the monsters.");
         System.out.println();
@@ -162,49 +171,12 @@ public class Maze
     }
 
     /** 
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
-     * 
-     * @param Command, uses
-     *      The command used to determine exit command
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
-            StdDraw.clear();
-            currentRoom.displayImage();
-            currentRoom.displayDesc();
-            if(currentRoom.containsParcel()!=false){
-                //myUser.addHealth();
-                currentRoom.removeParcel();;
-            }
-        }
-    }
-
-    /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @param Command, uses command to determine exit command.
      * @return true, if this command quits the game, false otherwise.
      */
-    private boolean quit(Command command) 
-    {
+    private boolean quit(Command command) {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
@@ -215,11 +187,11 @@ public class Maze
     }
     
     public void increaseMonsterCount() { 
-        monsterCount ++;
+        monsterCount++;
     }
     
     public void reduceMonsterCount() { 
-        monsterCount --; 
+        monsterCount--; 
     }
     
     public void printMonsterCount() { 

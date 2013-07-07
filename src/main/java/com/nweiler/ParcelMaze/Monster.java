@@ -10,7 +10,7 @@ import java.util.Random;
  * that changes with each call to checkAttack().
  */
 
-public class Monster implements Actor
+public class Monster extends Actor
 {
 	private int health;
 	private static Random rand = new Random();

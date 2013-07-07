@@ -7,7 +7,7 @@ import java.util.Random;
  * Health starts at 100 and may decrease as the player encounters monsters.
  */
 
-public class User implements Actor
+public class User extends Actor
 {
     private int userHealth;
     // private int bonus;
