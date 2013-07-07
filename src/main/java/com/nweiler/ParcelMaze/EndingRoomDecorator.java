@@ -13,72 +13,64 @@ import java.util.Random;
  */
 public class EndingRoomDecorator extends RoomDecorator {
     
-    private Room standardRoom;
-    private String imageFilePath;
-    private String description;
-    private HashMap<String, Room> exits;
-    private Monster myMonster;
-    private boolean hasParcel;
-    private boolean hasMonster;
-    private static Random rand = new Random();
+    private Room simpleRoom;
     
-    public EndingRoomDecorator(String name, String description, 
-            String imageFilePath, boolean hasParcel, boolean hasMonster) {
-        super(name, description, imageFilePath, hasParcel, hasMonster);
+    public EndingRoomDecorator(Room simpleRoom) {
+        this.simpleRoom = simpleRoom;
     }
     
     @Override
     public boolean hasMonster() {
-        return standardRoom.hasMonster();
+        return simpleRoom.hasMonster();
     }
     
     @Override
     public boolean hasParcel() {
-        return standardRoom.hasParcel();
+        return simpleRoom.hasParcel();
     }
     
     @Override
     public void removeParcel() {
-        standardRoom.removeParcel();
+        simpleRoom.removeParcel();
     }
     
     @Override
     public void setExit(String direction, Room neighbor) {
-        standardRoom.setExit(direction, neighbor);
+        simpleRoom.setExit(direction, neighbor);
     }
     
     @Override
     public String getShortDescription() {
-        return standardRoom.getShortDescription();
+        return simpleRoom.getShortDescription();
     }
     
     @Override
     public String getLongDescription() {
-        return standardRoom.getLongDescription();
+        return simpleRoom.getLongDescription();
     }
     
     @Override
     public String getExitString() {
-        return standardRoom.getExitString();
+        return simpleRoom.getExitString();
     }
     
     @Override
     public Room getExit(String direction) {
-        return standardRoom.getExit(direction);
+        return simpleRoom.getExit(direction);
     }
     
     @Override
     public void displayImage() {
-        standardRoom.displayImage();
+        simpleRoom.displayImage();
     }
     
     @Override
     public void displayDesc() {
-        standardRoom.displayDesc();
+        simpleRoom.displayDesc();
     }
     
     @Override
     public String getImageFilePath() {
-        return standardRoom.getImageFilePath();
+        return simpleRoom.getImageFilePath();
     }
 }

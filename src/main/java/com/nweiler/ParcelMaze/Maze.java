@@ -2,6 +2,7 @@ package com.nweiler.ParcelMaze;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  * For our game "The Parcel Maze of Doom!" navigation through the maze is strictly text based.
@@ -22,6 +23,7 @@ public class Maze {
     private HashMap<String, String> exitStrings;
     private Actor myUser = new User();
     private int monsterCount = 0;
+    private static Random rand = new Random();
     
     /**
      * Private constructor for singleton
@@ -55,7 +57,8 @@ public class Maze {
             String imageFilePath = in.nextLine();
             String exitPairs = in.nextLine();
             String description = FileUtil.readParagraph(in);
-            rooms.put(name, roomFactory.createRoom(name, "room", description, imageFilePath, false, false));
+            rooms.put(name, roomFactory.createRoom(name, "room", 
+                    description, imageFilePath, true, true));
             exitStrings.put(name, exitPairs);
         }
         in.close();

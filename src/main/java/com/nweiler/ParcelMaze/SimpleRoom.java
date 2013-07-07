@@ -3,7 +3,6 @@ package com.nweiler.ParcelMaze;
 //Code for rooms in the Maze. Borrows code from Zuul 
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Random;
 
 /**
@@ -11,7 +10,7 @@ import java.util.Random;
 * It also may or may not contain a parcel and/or a monster.
 */
 
-public class StandardRoom implements Room
+public class SimpleRoom implements Room
 {
     private String name;
     private String imageFilePath;
@@ -28,7 +27,7 @@ public class StandardRoom implements Room
   * @param imageFilePath The path and filename for the image.
   * @param myUser The instance of the user class created at the beginning of the maze.
   */
-    public StandardRoom(String name, String description, 
+    public SimpleRoom(String name, String description, 
             String imageFilePath, boolean hasParcel, boolean hasMonster) {
         this.name = name;
         this.description = description;
@@ -44,7 +43,7 @@ public class StandardRoom implements Room
         }
         x = rand.nextInt(2);
      
-        if(x==0 || imageFilePath.equals("castle.jpg")) { //prevents monster in first room
+        if(x==0 || name.equals("castle")) { //prevents monster in first room
             hasMonster = false;
         }
         else if(x==1) {
@@ -52,8 +51,7 @@ public class StandardRoom implements Room
         }
     }
     
-    public void displayDesc()
-    {
+    public void displayDesc() {
         StdDraw.text(.5, .2, "You are" + description);
         if(hasParcel){
             StdDraw.text(.5, .1, "This room contains a parcel!");

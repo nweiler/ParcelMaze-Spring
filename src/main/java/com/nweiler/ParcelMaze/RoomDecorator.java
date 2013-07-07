@@ -10,12 +10,6 @@ package com.nweiler.ParcelMaze;
  */
 public abstract class RoomDecorator implements Room {
     
-    private Room standardRoom;
-    
-    public RoomDecorator(Room standardRoom) {
-        this.standardRoom = standardRoom;
-    }
-    
     public abstract boolean hasMonster();
     public abstract boolean hasParcel();
     public abstract void removeParcel();
