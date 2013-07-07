@@ -1,5 +1,6 @@
 package com.nweiler.ParcelMaze;
 
+
 //Code for rooms in the Maze. Borrows code from Zuul 
 import java.util.Set;
 import java.util.HashMap;
@@ -10,17 +11,17 @@ import java.util.Random;
 * It also may or may not contain a parcel and/or a monster.
 */
 
-public class SimpleRoom implements Room
-{
+public class SimpleRoom implements Room {
     private String name;
     private String imageFilePath;
     private String description;
     private HashMap<String, Room> exits;
-    private Monster myMonster;
-    private boolean hasParcel;
-    private boolean hasMonster;
-    private static Random rand = new Random();
- 
+    private Actor myMonster;
+    private Parcel myParcel;
+    private int hasParcel;
+    private int hasMonster;
+    private Random rand = new Random();
+
  /**
   * Creates a room and initializes the description, image file and booleans for monster and parcel.
   * @param description A description of the room to be displayed along with the image.
@@ -28,50 +29,38 @@ public class SimpleRoom implements Room
   * @param myUser The instance of the user class created at the beginning of the maze.
   */
     public SimpleRoom(String name, String description, 
-            String imageFilePath, boolean hasParcel, boolean hasMonster) {
+            String imageFilePath, int hasParcel, int hasMonster) {
         this.name = name;
         this.description = description;
         this.imageFilePath = imageFilePath;
         exits = new HashMap<String, Room>();
-
-        int x = rand.nextInt(2); // randomly generate parcel (or not)
-        if(x==0 || imageFilePath.equals("castle.jpg")) { //prevents parcel in first room
-            hasParcel = false;
-        }
-        else {
-            hasParcel = true;
-        }
-        x = rand.nextInt(2);
-     
-        if(x==0 || name.equals("castle")) { //prevents monster in first room
-            hasMonster = false;
-        }
-        else if(x==1) {
-            hasMonster = true;
-        }
+        this.hasParcel = hasParcel;
+        this.hasMonster = hasMonster;
+        if(hasMonster == 1) { myMonster = new Monster(); }
+        if(hasParcel == 1) { myParcel = new Parcel(); }
     }
     
     public void displayDesc() {
         StdDraw.text(.5, .2, "You are" + description);
-        if(hasParcel){
+        if(hasParcel == 1) {
             StdDraw.text(.5, .1, "This room contains a parcel!");
-            StdDraw.text(.5, .05,"You picked up the parcel and got +10 health!");
+            StdDraw.text(.5, .05, "You picked up the parcel and got +10 health!");
         }
-        if(hasMonster) {
+        if(hasMonster == 1) {
             StdDraw.text(.5, .15, "There is a monster! Ahh!");
         }
     }
  
-    public boolean hasMonster() {
+    public int hasMonster() {
         return hasMonster;
     }
  
-    public boolean hasParcel() {
+    public int hasParcel() {
         return hasParcel;
     }
  
     public void removeParcel() {
-        hasParcel = false;
+        hasParcel = 0;
     }
 
     public void setExit(String direction, Room neighbor) {
@@ -108,7 +97,7 @@ public class SimpleRoom implements Room
     */
     public void displayImage() {
         StdDraw.picture(.5, .5, imageFilePath, 1.1, 1);
-        if(hasMonster!=false) {
+        if(hasMonster == 1) {
             StdDraw.picture(.5, .5, "monster.png", 1.05, .9);
         }
     }
@@ -124,5 +113,13 @@ public class SimpleRoom implements Room
     
     public String getImageFilePath() {
         return imageFilePath;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
 }

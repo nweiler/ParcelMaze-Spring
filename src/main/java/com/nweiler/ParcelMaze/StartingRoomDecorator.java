@@ -1,13 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nweiler.ParcelMaze;
 
-/**
- *
- * @author sirius
- */
+
 public class StartingRoomDecorator extends RoomDecorator {
     
     private Room simpleRoom;
@@ -16,13 +9,13 @@ public class StartingRoomDecorator extends RoomDecorator {
         this.simpleRoom = simpleRoom;
     }
     
-        @Override
-    public boolean hasMonster() {
+    @Override
+    public int hasMonster() {
         return simpleRoom.hasMonster();
     }
     
     @Override
-    public boolean hasParcel() {
+    public int hasParcel() {
         return simpleRoom.hasParcel();
     }
     
@@ -69,5 +62,13 @@ public class StartingRoomDecorator extends RoomDecorator {
     @Override
     public String getImageFilePath() {
         return simpleRoom.getImageFilePath();
+    }
+    
+    public String getName() {
+        return simpleRoom.getName();
+    }
+    
+    public void setName(String name) {
+        simpleRoom.setName(name);
     }
 }

@@ -1,5 +1,6 @@
 package com.nweiler.ParcelMaze;
 
+
 import java.util.Random;
 
 /**
@@ -33,6 +34,7 @@ public class User extends Actor
         return name;
     }
     
+    @Override
     public int getHealth() {
         return userHealth;
     }

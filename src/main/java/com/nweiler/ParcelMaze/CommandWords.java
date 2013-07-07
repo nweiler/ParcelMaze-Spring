@@ -1,8 +1,7 @@
 package com.nweiler.ParcelMaze;
 
 
-public class CommandWords
-{
+public class CommandWords {
     // a constant array that holds all valid command words
     private static final String[] validCommands = {"go", "quit", "help", "health","monsters"};
 
@@ -10,8 +9,7 @@ public class CommandWords
      * Check whether a given String is a valid command word. 
      * Return true if it is, false if it isn't.
      */
-    public static boolean isCommand(String aString)
-    {
+    public static boolean isCommand(String aString) {
         for(String cmd : validCommands) 
             if(cmd.equals(aString))
                 return true;
@@ -22,8 +20,7 @@ public class CommandWords
     /**
      * Print all valid commands to System.out.
      */
-    public static String allCommands() 
-    {
+    public static String allCommands() {
         String all = "";
         for(String cmd : validCommands) 
             all += cmd + "  ";

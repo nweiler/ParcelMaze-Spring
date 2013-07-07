@@ -1,5 +1,6 @@
 package com.nweiler.ParcelMaze;
 
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Random;
@@ -18,6 +19,7 @@ import java.util.Random;
 
 public class Maze {
     private static Maze instance;
+    private RoomFactory roomFactory;
     private Room currentRoom;
     private HashMap<String, Room> rooms;
     private HashMap<String, String> exitStrings;
@@ -29,7 +31,7 @@ public class Maze {
      * Private constructor for singleton
      */
     private Maze() {
-        RoomFactory roomFactory = new RoomFactory();
+        roomFactory = new RoomFactory();
     }
     
     public static synchronized Maze getInstance() {
@@ -40,12 +42,12 @@ public class Maze {
     }
     
      // This prevents duplicate instances via cloning (highly unlikely)
+    @Override
     public Object clone() throws CloneNotSupportedException {
     	throw new CloneNotSupportedException();
     }
 
     public void createRooms(String roomDataFile) {
-        RoomFactory roomFactory = new RoomFactory();
         Scanner in = ResourceUtil.openFileScanner(roomDataFile);
         if(in == null) {
             System.out.println("File not found: " + roomDataFile);
@@ -57,9 +59,12 @@ public class Maze {
             String imageFilePath = in.nextLine();
             String exitPairs = in.nextLine();
             String description = FileUtil.readParagraph(in);
+            int hasParcel = rand.nextInt(2);
+            int hasMonster = rand.nextInt(2);
             rooms.put(name, roomFactory.createRoom(name, "room", 
-                    description, imageFilePath, true, true));
+                    description, imageFilePath, hasParcel, hasMonster));
             exitStrings.put(name, exitPairs);
+            if(hasMonster == 1) { monsterCount ++; }
         }
         in.close();
         for(String name: rooms.keySet()) {
@@ -70,7 +75,7 @@ public class Maze {
                 String neighbor = lineIn.next();
                 room.setExit(direction, rooms.get(neighbor));
             }
-        }   
+        }        
     }
         
     public void play() {
@@ -89,7 +94,7 @@ public class Maze {
                 finished = processCommand(command);
             }
             
-            if(currentRoom.getImageFilePath().equals("castle.jpg")) {
+            if(currentRoom.getName().equals("castle")) {
                 finished = true;
             }
             

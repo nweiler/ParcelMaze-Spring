@@ -1,16 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nweiler.ParcelMaze;
 
-import java.util.HashMap;
-import java.util.Random;
 
-/**
- *
- * @author sirius
- */
 public class EndingRoomDecorator extends RoomDecorator {
     
     private Room simpleRoom;
@@ -20,12 +10,12 @@ public class EndingRoomDecorator extends RoomDecorator {
     }
     
     @Override
-    public boolean hasMonster() {
+    public int hasMonster() {
         return simpleRoom.hasMonster();
     }
     
     @Override
-    public boolean hasParcel() {
+    public int hasParcel() {
         return simpleRoom.hasParcel();
     }
     
@@ -73,4 +63,13 @@ public class EndingRoomDecorator extends RoomDecorator {
     public String getImageFilePath() {
         return simpleRoom.getImageFilePath();
     }
+        
+    public String getName() {
+        return simpleRoom.getName();
+    }
+    
+    public void setName(String name) {
+        simpleRoom.setName(name);
+    }
+    
 }

@@ -8,8 +8,7 @@ import java.io.InputStream;
  * Utilities for accessing resources stored with the .class file in
  * the file system or in a jar file.
  */
-public class ResourceUtil
-{        
+public class ResourceUtil {        
     /**
      * Return an input stream coming from a file located with this class
      * in the filesystem or in a jar file. 
@@ -19,10 +18,9 @@ public class ResourceUtil
      *   A InputStream reading from the specified file, 
      *   or null if there is an error.
      */    
-    public static InputStream openBundledFile(String fileName)
-    {
+    public static InputStream openBundledFile(String fileName) {
    	    return ResourceUtil.class.getClassLoader().getResourceAsStream(fileName);
-   	}
+    }
     
     /**
      * Create and return a Scanner coming from a text file located with this 
@@ -33,11 +31,9 @@ public class ResourceUtil
      *   A Scanner reading from the specified file, 
      *   or null if there is an error.
      */    
-    public static Scanner openFileScanner(String fileName)
-    {  
+    public static Scanner openFileScanner(String fileName) {  
         InputStream is = openBundledFile(fileName);
-   	    if (is == null)
-   	        return null;
+   	if (is == null) return null;
         return new Scanner(is);
     }
 }

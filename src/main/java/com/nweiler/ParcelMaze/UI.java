@@ -9,16 +9,14 @@ import java.util.Scanner;
  *  
  * @version 2006.10.04
  */
-public class UI 
-{
+public class UI {
     /* Static variable is available to all methods, static or instance. */
     private static Scanner in = new Scanner(System.in);
     
     /** Return the Scanner reading the keyboard.
      *  There should be ONLY ONE in a program.
      */ 
-    public static Scanner getKeyboardScanner() 
-    {
+    public static Scanner getKeyboardScanner() {
         return in;
     }
 
@@ -42,8 +40,7 @@ public class UI
      *     The first character of the line entered or a blank if the line
      *     is empty.
      */
-    public static char readChar(String prompt)
-    {
+    public static char readChar(String prompt) {
         String line = readLine(prompt);
         if (line.length() == 0)
             return ' ';
@@ -57,8 +54,7 @@ public class UI
      * @return 
      *    True if the answer is yes, or False if it is no.
      */
-    public static boolean agree(String question)
-    {
+    public static boolean agree(String question) {
         String yesStr = "yYtT", noStr = "nNfF", legalStr = yesStr + noStr;
         
         char ans = readChar(question);
@@ -78,8 +74,7 @@ public class UI
      *  @return
      *      The value entered by the user.
      */  
-    public static int readInt(String prompt)
-    {
+    public static int readInt(String prompt) {
         System.out.print(prompt);
         while (! in.hasNextInt()) 
         {
@@ -100,8 +95,7 @@ public class UI
      *  @return
      *      The value entered by the user.
      */  
-    public static double readDouble(String prompt)
-    {
+    public static double readDouble(String prompt) {
         System.out.print(prompt);
         while (! in.hasNextDouble()) 
         {

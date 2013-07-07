@@ -1,5 +1,6 @@
 package com.nweiler.ParcelMaze;
 
+
 public abstract class Actor {
 
     private Room currentRoom;
@@ -43,7 +44,7 @@ public abstract class Actor {
             StdDraw.clear();
             currentRoom.displayImage();
             currentRoom.displayDesc();
-            if(currentRoom.hasParcel()!=false){
+            if(currentRoom.hasParcel() == 1){
                 //myUser.addHealth();
                 currentRoom.removeParcel();;
             }

@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nweiler.ParcelMaze;
 
-/**
- *
- * @author sirius
- */
+
 public abstract class RoomDecorator implements Room {
     
-    public abstract boolean hasMonster();
-    public abstract boolean hasParcel();
+    public abstract int hasMonster();
+    public abstract int hasParcel();
     public abstract void removeParcel();
     public abstract void setExit(String direction, Room neighbor);
     public abstract String getShortDescription();
@@ -21,4 +14,6 @@ public abstract class RoomDecorator implements Room {
     public abstract void displayImage();
     public abstract void displayDesc();
     public abstract String getImageFilePath();
+    public abstract String getName();
+    public abstract void setName(String name);
 }

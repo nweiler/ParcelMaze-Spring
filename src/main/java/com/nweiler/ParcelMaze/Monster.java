@@ -10,36 +10,32 @@ import java.util.Random;
  * that changes with each call to checkAttack().
  */
 
-public class Monster extends Actor
-{
-	private int health;
-	private static Random rand = new Random();
+public class Monster extends Actor {
+    private int health;
+    private static Random rand = new Random();
 
-	/**
-	 * Constructor for the monster class.
-	 * Sets monsters health to 100.
-	 */
-	public Monster()
-	{
-    	health = 100;
+    /**
+     * Constructor for the monster class.
+     * Sets monsters health to 100.
+     */
+    public Monster() {
+        health = 100;
     	//attack = rand.nextInt(10);
-	}
+    }
 
-	/**
-	 * Returns the monster's current health.
-	 * @return Monster's health
-	 */
-	public int getHealth()
-	{
-    	return health;
-	}
+    /**
+     * Returns the monster's current health.
+     * @return Monster's health
+     */
+    public int getHealth() {
+        return health;
+    }
     
-	/**
-	 * Checks the strength of the monster's attack for the fight.
-	 * @return Monster attack strength
-	 */
-	public int attack()
-	{
-    	return rand.nextInt(10);
-	}
+    /**
+     * Checks the strength of the monster's attack for the fight.
+     * @return Monster attack strength
+     */
+    public int attack() {
+        return rand.nextInt(10);
+    }
 }

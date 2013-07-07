@@ -1,12 +1,9 @@
 package com.nweiler.ParcelMaze;
 
-/**
- * @author sirius
- */
+
 public interface Room {
-    
-    boolean hasMonster();
-    boolean hasParcel();
+    int hasMonster();
+    int hasParcel();
     void removeParcel();
     void setExit(String direction, Room neighbor);
     String getShortDescription();
@@ -16,4 +13,6 @@ public interface Room {
     void displayImage();
     void displayDesc();
     String getImageFilePath();
+    String getName();
+    void setName(String name);
 }

@@ -3,15 +3,13 @@ package com.nweiler.ParcelMaze;
 
 import java.util.Scanner;
 
-public class Parser 
-{
+public class Parser {
 
     /**
      * Parse the next user command.
      * @return The user's command.
      */
-    public static Command getCommand() 
-    {
+    public static Command getCommand() {
         String inputLine = "";   // will hold the full input line
         String word1;
         String word2;
@@ -43,8 +41,7 @@ public class Parser
     /**
      * Print out a list of valid command words.
      */
-    public static void showCommands()
-    {
+    public static void showCommands() {
         System.out.println(CommandWords.allCommands());
     }
 }
