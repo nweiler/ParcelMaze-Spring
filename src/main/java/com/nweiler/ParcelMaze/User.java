@@ -14,11 +14,7 @@ public class User extends Actor
     private Random rand = new Random();
     private String name;
     
-    /**
-     * Create an instance of the User object
-     */
-    public User()
-    {
+    public User() {
         userHealth = 100;
         //userAttack = rand.nextInt(25 + 1);
     }
@@ -27,45 +23,28 @@ public class User extends Actor
      * Overloaded constructor allows for possible future addition on name attribute for the User.
      * @param name The player's name entered at the start of the game.
      */
-    public User(String name)
-    {
+    public User(String name) {
         userHealth = 100;
         //userAttack = rand.nextInt(25 + 1);
         this.name = name;
     }
     
-   /**
-    * Returns user name
-    * @return The user name
-    */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
     
-    /**
-     * Returns user health
-     * @return User's health
-     */
-    public int getHealth()
-    {
+    public int getHealth() {
         return userHealth;
     }
     
-    /**
-     * Checks the user attack strength
-     * @return User's attack strength
-     */
-    public int attack()
-    {
+    public int attack() {
         return rand.nextInt(25 + 1);
     }
     
     /**
      * Used for testing while creating player death sequence.
      */
-    public void die()
-    {
+    public void die() {
         Maze maze = Maze.getInstance();
         maze.play();
     }
@@ -74,8 +53,7 @@ public class User extends Actor
      * The method to be used by the parcels to add user health.
      * This will happen when the user encounters parcels throughout the castle and picks them up.
      */
-    public void addHealth()
-    {
+    public void addHealth() {
         userHealth += 10;
     }
     

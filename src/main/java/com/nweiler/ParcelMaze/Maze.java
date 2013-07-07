@@ -55,7 +55,7 @@ public class Maze {
             String imageFilePath = in.nextLine();
             String exitPairs = in.nextLine();
             String description = FileUtil.readParagraph(in);
-            rooms.put(name, roomFactory.createRoom("room", description, imageFilePath, false, false));
+            rooms.put(name, roomFactory.createRoom(name, "room", description, imageFilePath, false, false));
             exitStrings.put(name, exitPairs);
         }
         in.close();

@@ -8,11 +8,11 @@ package com.nweiler.ParcelMaze;
  *
  * @author sirius
  */
-public class StartingRoom extends StandardRoom {
+public class StartingRoomDecorator extends StandardRoom {
     
     private Room StandardRoom;
     
-    public StartingRoom(String description, String imageFilePath) {
+    public StartingRoomDecorator(String description, String imageFilePath) {
         
     }
 }
