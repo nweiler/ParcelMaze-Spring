@@ -22,6 +22,10 @@ public class Monster extends Actor {
         health = 100;
     	//attack = rand.nextInt(10);
     }
+    
+    public void die() {
+        health = 0;
+    }
 
     /**
      * Returns the monster's current health.

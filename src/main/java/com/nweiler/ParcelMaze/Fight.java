@@ -27,8 +27,7 @@ public class Fight
      * @param monster The monster to be included in the fight
      * @return Outcome of the fight. True if player dies, false if monster dies.
      */
-    public boolean fight(User player, Monster monster)
-    {
+    public boolean fight(Actor player, Actor monster) {
     	Random rand = new Random();
         int userAttack = player.attack();
         int monsterHealth = 100;

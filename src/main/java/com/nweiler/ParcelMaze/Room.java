@@ -15,4 +15,5 @@ public interface Room {
     String getImageFilePath();
     String getName();
     void setName(String name);
+    public Actor getMonster();
 }

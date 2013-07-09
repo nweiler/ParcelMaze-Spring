@@ -71,5 +71,8 @@ public class EndingRoomDecorator extends RoomDecorator {
     public void setName(String name) {
         simpleRoom.setName(name);
     }
-    
+ 
+    public Actor getMonster() {
+        return simpleRoom.getMonster();
+    }
 }

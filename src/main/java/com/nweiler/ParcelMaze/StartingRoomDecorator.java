@@ -64,11 +64,18 @@ public class StartingRoomDecorator extends RoomDecorator {
         return simpleRoom.getImageFilePath();
     }
     
+    @Override
     public String getName() {
         return simpleRoom.getName();
     }
     
+    @Override
     public void setName(String name) {
         simpleRoom.setName(name);
+    }
+    
+    @Override
+    public Actor getMonster() {
+        return simpleRoom.getMonster();
     }
 }

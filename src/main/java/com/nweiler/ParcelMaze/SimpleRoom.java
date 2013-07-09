@@ -122,4 +122,8 @@ public class SimpleRoom implements Room {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public Actor getMonster() {
+        return myMonster;
+    }
 }

@@ -51,10 +51,6 @@ public class User extends Actor
         maze.play();
     }
     
-    /**
-     * The method to be used by the parcels to add user health.
-     * This will happen when the user encounters parcels throughout the castle and picks them up.
-     */
     public void addHealth() {
         userHealth += 10;
     }

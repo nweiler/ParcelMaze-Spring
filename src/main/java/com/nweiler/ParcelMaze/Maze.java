@@ -145,7 +145,11 @@ public class Maze {
             currentRoom.displayDesc();
             if(currentRoom.hasParcel() == 1){
                 //myUser.addHealth();
-                currentRoom.removeParcel();;
+                currentRoom.removeParcel();
+            }
+            if(currentRoom.hasMonster() == 1){
+                Fight fight = new Fight();
+                fight.fight(currentRoom.getMonster(), myUser);
             }
         }
     }

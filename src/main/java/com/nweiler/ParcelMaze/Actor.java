@@ -9,7 +9,13 @@ public abstract class Actor {
     public int getHealth() {
         return health;
     }
+
+    public abstract void die();    
     
+    public void changeHealth(int damage) {
+        health -= damage;
+    }
+            
     public void setHealth(int health) {
         this.health = health;
     }

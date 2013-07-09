@@ -16,4 +16,5 @@ public abstract class RoomDecorator implements Room {
     public abstract String getImageFilePath();
     public abstract String getName();
     public abstract void setName(String name);
+    public abstract Actor getMonster();
 }
