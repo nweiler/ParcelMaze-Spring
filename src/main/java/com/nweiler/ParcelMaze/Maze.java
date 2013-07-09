@@ -120,6 +120,40 @@ public class Maze {
         }
     }
     
+    
+    
+    public void goRoom(Command command) {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Go where?");
+            return;
+        }
+
+        String direction = command.getSecondWord();
+
+        // Try to leave current room.
+        Room nextRoom = currentRoom.getExit(direction);
+
+        if (nextRoom == null) {
+            System.out.println("There is no door!");
+        }
+        else {
+            currentRoom = nextRoom;
+            System.out.println(currentRoom.getLongDescription());
+            StdDraw.clear();
+            currentRoom.displayImage();
+            currentRoom.displayDesc();
+            if(currentRoom.hasParcel() == 1){
+                //myUser.addHealth();
+                currentRoom.removeParcel();;
+            }
+        }
+    }
+
+    
+    
+    
+    
     /**
      * Print out the opening message for the player.
      */
@@ -149,7 +183,7 @@ public class Maze {
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            myUser.goRoom(command);
+            goRoom(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);

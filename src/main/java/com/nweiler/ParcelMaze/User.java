@@ -66,5 +66,5 @@ public class User extends Actor
     public void changeHealth(int damage)
     {
         userHealth -= damage;
-    }
+    }    
 }
