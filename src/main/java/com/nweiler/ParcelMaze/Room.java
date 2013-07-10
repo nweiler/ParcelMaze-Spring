@@ -16,4 +16,5 @@ public interface Room {
     String getName();
     void setName(String name);
     public Actor getMonster();
+    public void removeMonster();
 }

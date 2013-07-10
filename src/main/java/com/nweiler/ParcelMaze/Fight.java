@@ -15,7 +15,7 @@ public class Fight
 {
     // private int bonus;
     private Maze maze = Maze.getInstance();
-  
+    private int bonus;
     /**
      * Empty constructor for fight class.
      * We may add something here...
@@ -29,8 +29,6 @@ public class Fight
      */
     public boolean fight(Actor player, Actor monster) {
     	Random rand = new Random();
-        int userAttack = player.attack();
-        int monsterHealth = 100;
         // int monsterAttack = cthulu.checkAttack();
         int [] punch = {1, 1, 1, 1, 1, 4};
         int [] kick = {0, 0, 0, 4, 4, 4};
@@ -41,20 +39,20 @@ public class Fight
         while(input != 1 && input != 2){
             input = UI.readInt("Nooo!!! Enter 1 or 2! ");
         }
-        while(monsterHealth > 0  && player.getHealth() > 0 && (input == 1 || input == 2)){
+        while(monster.getHealth() > 0  && player.getHealth() > 0 && (input == 1 || input == 2)){
             if(input == 1){
                 bonus = rand.nextInt(6);
                 bonus = punch[bonus];                                              
                 if(bonus == 1){
-                    monsterHealth -= player.attack();
-                    System.out.print("You hit the monster! " + "Monster has " + max(0, monsterHealth) + " health left!\n");
-                    player.changeHealth(monster.attack());
+                    monster.damage(player.attack() * 6);
+                    System.out.print("You hit the monster! " + "Monster has " + max(0, monster.getHealth()) + " health left!\n");
+                    player.damage(monster.attack());
                     System.out.print("The monster responded with a hit of his own!\n");
                     System.out.print("You have " + max(0, player.getHealth()) + " health left!\n");
                 }               
                 else{
-                   monsterHealth -= userAttack*2;
-                   System.out.print("Critical hit!\n" + "Monster has " + max(0, monsterHealth) + " health left!\n");
+                   monster.damage(player.attack()*2 * 6);
+                   System.out.print("Critical hit!\n" + "Monster has " + max(0, monster.getHealth()) + " health left!\n");
                    System.out.print("The monster couldn't hit you because he stumbled!\n");
                    System.out.print("You have " + max(0, player.getHealth()) + " health left!\n");
                 }
@@ -63,19 +61,19 @@ public class Fight
                 bonus = rand.nextInt(6);
                 bonus = kick[bonus];
                 if(bonus == 0){
-                    System.out.print("You missed! " + "Monster has " + monsterHealth + " health left!\n");
-                    player.changeHealth(monster.attack()*2);
+                    System.out.print("You missed! " + "Monster has " + monster.getHealth() + " health left!\n");
+                    player.damage(monster.attack()*2);
                     System.out.print("The monster hit you harder because you missed!\n");
                     System.out.print("You have " + max(0, player.getHealth()) + " health left!\n");
                 }   
                 else {
-                    monsterHealth -= (player.attack())*2;
-                    System.out.print("Critical hit! " + "Monster has " + max(0,monsterHealth) + " health left!\n");
+                    monster.damage(player.attack()*2);
+                    System.out.print("Critical hit! " + "Monster has " + max(0,monster.getHealth()) + " health left!\n");
                     System.out.print("The monster couldn't hit you because he stumbled!\n");
                     System.out.print("You have " + max(0, player.getHealth()) + " health left!\n");
                 }
             }
-            if(monsterHealth > 0 && player.getHealth() > 0) {
+            if(monster.getHealth() > 0 && player.getHealth() > 0) {
                 input = UI.readInt("Press 1 to punch or 2 to kick the monster!\n");
                 while(input < 1 || input > 2){
                     input = UI.readInt("You'll die! Press 1 or 2 to attack the monster and not die!\n");
@@ -85,13 +83,13 @@ public class Fight
         if(player.getHealth() <= 0){
             System.out.print("The monster dances on your corpse. You died.\n");
             player.die();
-            return true;
+            return false;
         }
         else {
             System.out.print("Your foe is defeated! Continue your journey.\n");
             maze.reduceMonsterCount();
             maze.printMonsterCount();
-            return false;
+            return true;
         }
     }
-}  
+}

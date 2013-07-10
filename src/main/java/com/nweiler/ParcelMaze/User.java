@@ -10,13 +10,12 @@ import java.util.Random;
 
 public class User extends Actor
 {
-    private int userHealth;
-    // private int bonus;
+    private int health;
     private Random rand = new Random();
     private String name;
     
     public User() {
-        userHealth = 100;
+        health = 100;
         //userAttack = rand.nextInt(25 + 1);
     }
     
@@ -25,8 +24,7 @@ public class User extends Actor
      * @param name The player's name entered at the start of the game.
      */
     public User(String name) {
-        userHealth = 100;
-        //userAttack = rand.nextInt(25 + 1);
+        health = 100;
         this.name = name;
     }
     
@@ -36,7 +34,7 @@ public class User extends Actor
     
     @Override
     public int getHealth() {
-        return userHealth;
+        return health;
     }
     
     public int attack() {
@@ -52,15 +50,15 @@ public class User extends Actor
     }
     
     public void addHealth() {
-        userHealth += 10;
+        health += 10;
     }
     
     /**
      * Alternative to addHealth method. 
      * @param Damage The adjustment made to the user health
      */
-    public void changeHealth(int damage)
+    public void damage(int damage)
     {
-        userHealth -= damage;
+        health -= damage;
     }    
 }

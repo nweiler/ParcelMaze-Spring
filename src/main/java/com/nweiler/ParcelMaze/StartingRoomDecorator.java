@@ -78,4 +78,9 @@ public class StartingRoomDecorator extends RoomDecorator {
     public Actor getMonster() {
         return simpleRoom.getMonster();
     }
+    
+    @Override
+    public void removeMonster() {
+        simpleRoom.removeMonster();
+    }
 }

@@ -126,4 +126,8 @@ public class SimpleRoom implements Room {
     public Actor getMonster() {
         return myMonster;
     }
+    
+    public void removeMonster() {
+        hasMonster = 0;
+    }
 }

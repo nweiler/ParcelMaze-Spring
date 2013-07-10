@@ -12,7 +12,7 @@ public abstract class Actor {
 
     public abstract void die();    
     
-    public void changeHealth(int damage) {
+    public void damage(int damage) {
         health -= damage;
     }
             

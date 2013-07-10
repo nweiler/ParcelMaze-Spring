@@ -149,14 +149,14 @@ public class Maze {
             }
             if(currentRoom.hasMonster() == 1){
                 Fight fight = new Fight();
-                fight.fight(currentRoom.getMonster(), myUser);
+                boolean playerWins = fight.fight(currentRoom.getMonster(), myUser);
+                if (playerWins) currentRoom.removeMonster();
+                
             }
+            StdDraw.clear();
+            currentRoom.displayImage();
         }
     }
-
-    
-    
-    
     
     /**
      * Print out the opening message for the player.

@@ -30,11 +30,21 @@ public class Monster extends Actor {
     /**
      * Returns the monster's current health.
      * @return Monster's health
-     */
+    */ 
+    @Override
     public int getHealth() {
         return health;
     }
-    
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void damage(int damage)
+    {
+        health -= damage;
+    }    
     /**
      * Checks the strength of the monster's attack for the fight.
      * @return Monster attack strength
@@ -42,4 +52,5 @@ public class Monster extends Actor {
     public int attack() {
         return rand.nextInt(10);
     }
+    
 }
