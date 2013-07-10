@@ -144,14 +144,14 @@ public class Maze {
             currentRoom.displayImage();
             currentRoom.displayDesc();
             if(currentRoom.hasParcel() == 1){
-                //myUser.addHealth();
+                //myUser.addHealth(10);
                 currentRoom.removeParcel();
             }
             if(currentRoom.hasMonster() == 1){
                 Fight fight = new Fight();
-                boolean playerWins = fight.fight(currentRoom.getMonster(), myUser);
+                System.out.println(currentRoom.getMonster().getHealth());
+                boolean playerWins = fight.fight(myUser, currentRoom.getMonster());
                 if (playerWins) currentRoom.removeMonster();
-                
             }
             StdDraw.clear();
             currentRoom.displayImage();

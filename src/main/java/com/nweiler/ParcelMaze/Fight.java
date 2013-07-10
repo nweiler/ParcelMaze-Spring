@@ -32,26 +32,26 @@ public class Fight
         // int monsterAttack = cthulu.checkAttack();
         int [] punch = {1, 1, 1, 1, 1, 4};
         int [] kick = {0, 0, 0, 4, 4, 4};
-        int bonus = 0;
            
         int input = UI.readInt("There is a monster! Ahh!\nPress 1 to punch the monster. It doesn't hit hard, but it hits often\n"
                                     + "Press 2 to kick the monster. It might miss but it hits hard!\n");
         while(input != 1 && input != 2){
             input = UI.readInt("Nooo!!! Enter 1 or 2! ");
         }
-        while(monster.getHealth() > 0  && player.getHealth() > 0 && (input == 1 || input == 2)){
+        while(monster.getHealth() > 0  && player.getHealth() > 0 && (input == 1 || input == 2)) {
+            System.out.println(monster.hashCode());
             if(input == 1){
                 bonus = rand.nextInt(6);
                 bonus = punch[bonus];                                              
                 if(bonus == 1){
-                    monster.damage(player.attack() * 6);
+                    monster.damage(player.attack());
                     System.out.print("You hit the monster! " + "Monster has " + max(0, monster.getHealth()) + " health left!\n");
                     player.damage(monster.attack());
                     System.out.print("The monster responded with a hit of his own!\n");
                     System.out.print("You have " + max(0, player.getHealth()) + " health left!\n");
                 }               
                 else{
-                   monster.damage(player.attack()*2 * 6);
+                   monster.damage(player.attack()*2);
                    System.out.print("Critical hit!\n" + "Monster has " + max(0, monster.getHealth()) + " health left!\n");
                    System.out.print("The monster couldn't hit you because he stumbled!\n");
                    System.out.print("You have " + max(0, player.getHealth()) + " health left!\n");
