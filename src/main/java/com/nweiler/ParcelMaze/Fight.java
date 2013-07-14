@@ -39,7 +39,7 @@ public class Fight
             input = UI.readInt("Nooo!!! Enter 1 or 2! ");
         }
         while(monster.getHealth() > 0  && player.getHealth() > 0 && (input == 1 || input == 2)) {
-            System.out.println(monster.hashCode());
+            //System.out.println(monster.hashCode());
             if(input == 1){
                 bonus = rand.nextInt(6);
                 bonus = punch[bonus];                                              
