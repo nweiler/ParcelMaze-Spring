@@ -90,6 +90,14 @@ public class SimpleRoom implements Room {
     public Room getExit(String direction) {
         return exits.get(direction);
     }
+    
+    public void setExits(HashMap<String, Room> exits) {
+        this.exits = exits;
+    }
+    
+    public HashMap<String, Room> getExits() {
+        return exits;
+    }
 
     /**
     * Displays the room image

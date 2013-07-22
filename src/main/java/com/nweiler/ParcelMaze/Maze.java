@@ -52,42 +52,11 @@ public class Maze {
     }
 
     
-    public void createRooms(String roomDataFile) {
-        
-        Scanner in = ResourceUtil.openFileScanner(roomDataFile);
-        if(in == null) {
-            System.out.println("File not found: " + roomDataFile);
-        }
-        rooms = new HashMap<String, Room>();
-        exitStrings = new HashMap<String, String>();
-        while (in.hasNext()) {
-            String name = in.nextLine();
-            String imageFilePath = in.nextLine();
-            String exitPairs = in.nextLine();
-            String description = FileUtil.readParagraph(in);
-            int hasParcel = rand.nextInt(2);
-            int hasMonster = rand.nextInt(2);
-            rooms.put(name, roomFactory.createRoom(name, "room", 
-                    description, imageFilePath, hasParcel, hasMonster));
-            exitStrings.put(name, exitPairs);
-            if(hasMonster == 1) { monsterCount ++; }
-        }
-        in.close();
-        
-        for(String name: rooms.keySet()) {
-            Room room = rooms.get(name);
-            Scanner lineIn = new Scanner(exitStrings.get(name));
-            while (lineIn.hasNext()) {
-                String direction = lineIn.next();
-                String neighbor = lineIn.next();
-                room.setExit(direction, rooms.get(neighbor));
-            }
-        }        
-    }
-        
     public void play() {
         
         rooms = new HashMap<String, Room>();
+        exitStrings = new HashMap<String, String>();
+                
         rooms.put("outside", (Room) context.getBean("outside"));
         rooms.put("stable", (Room) context.getBean("stable"));
         rooms.put("warroom", (Room) context.getBean("warroom"));
@@ -106,6 +75,10 @@ public class Maze {
         rooms.put("bedroom", (Room) context.getBean("bedroom"));
         rooms.put("watchout", (Room) context.getBean("watchout"));
         rooms.put("court", (Room) context.getBean("court"));       
+                
+        for(Room x: rooms.values()) {
+            if(x.hasMonster()==1) { monsterCount ++; }
+        }
         
         currentRoom = rooms.get("outside");
         StdDraw.clear();

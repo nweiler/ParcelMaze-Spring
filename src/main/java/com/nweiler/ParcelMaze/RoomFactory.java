@@ -1,5 +1,6 @@
 package com.nweiler.ParcelMaze;
 
+import java.util.HashMap;
 
 public class RoomFactory {
    
