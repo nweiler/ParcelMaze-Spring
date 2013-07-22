@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="windows-1252"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+        
+    <bean id="outside"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="outside" />
+        <constructor-arg value="outside of the castle" />
+        <constructor-arg value="castle.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="stable"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="stable" />
+        <constructor-arg value="in the stable, amongst the haystacks" />
+        <constructor-arg value="stable.jpg" />
+        <constructor-arg value="1" />
+        <constructor-arg value="1" />
+    </bean>
+
+    <bean id="warroom"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="warroom" />
+        <constructor-arg value="in the war room" />
+        <constructor-arg value="warRoom.jpg" />
+        <constructor-arg value="1" />
+        <constructor-arg value="1" />
+    </bean>
+        
+    <bean id="greathall"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="greathall" />
+        <constructor-arg value="in the great hall" />
+        <constructor-arg value="hall.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="tunnel"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="tunnel" />
+        <constructor-arg value="in the underground tunnel" />
+        <constructor-arg value="tunnel.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="armory"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="armory" />
+        <constructor-arg value="in the armory" />
+        <constructor-arg value="armory.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="saferoom"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="saferoom" />
+        <constructor-arg value="in the safe room" />
+        <constructor-arg value="safe.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="dungeon"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="dungeon" />
+        <constructor-arg value="in the dungeon" />
+        <constructor-arg value="dungeon.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+            
+    <bean id="kitchen"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="kitchen" />
+        <constructor-arg value="in the castle kitchen" />
+        <constructor-arg value="kitchen.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+    
+    <bean id="servants"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="servants" />
+        <constructor-arg value="in the servants quarters - dead end" />
+        <constructor-arg value="servants.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+            
+    <bean id="wstairwell"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="wstairwell" />
+        <constructor-arg value="in the west stairwell" />
+        <constructor-arg value="wStairwell.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+        
+    <bean id="balcony"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="balcony" />
+        <constructor-arg value="in the north bacony" />
+        <constructor-arg value="balcony.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+            
+    <bean id="estairwell"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="estairwell" />
+        <constructor-arg value="in the east stairwell" />
+        <constructor-arg value="eStairwell.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+        
+    <bean id="wtower"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="wtower" />
+        <constructor-arg value="in the west tower" />
+        <constructor-arg value="wTower.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="etower"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="etower" />
+        <constructor-arg value="in the east tower" />
+        <constructor-arg value="etower.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+                            
+    <bean id="bedroom"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="bedroom" />
+        <constructor-arg value="in the master's bedroom" />
+        <constructor-arg value="master.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+        
+    </bean>       
+    
+    <bean id="watchout"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="watchout" />
+        <constructor-arg value="in the secret watch out tower" />
+        <constructor-arg value="watchout.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+                
+    <bean id="court"
+        class="com.nweiler.ParcelMaze.SimpleRoom" >
+        <constructor-arg value="court" />
+        <constructor-arg value="in the royal court" />
+        <constructor-arg value="court.jpg" />
+        <constructor-arg value="0" />
+        <constructor-arg value="0" />
+    </bean>
+</beans>

@@ -1,12 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.nweiler</groupId>
-  <artifactId>ParcelMaze-DesignPatterns</artifactId>
+  <artifactId>ParcelMaze-Spring</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
   <scm>
-  	<connection>scm:git:git@github.com:nweiler/ParcelMaze.git</connection>
-  	<url>scm:git:git@github.com:nweiler/ParcelMaze.git</url>
+  	<connection>scm:git:git@github.com:nweiler/ParcelMaze-Spring.git</connection>
+  	<url>scm:git:git@github.com:nweiler/ParcelMaze-Spring.git</url>
   	<developerConnection />
     <tag>ParcelMaze-1.0</tag>
   </scm>
@@ -37,4 +40,24 @@
         </plugin>
     </plugins>
     </build>
+    
+    <properties>
+		<spring.version>3.2.3.RELEASE</spring.version>
+    </properties>
+    
+    <dependencies>
+        
+	<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+	</dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+	</dependency>
+    
+    </dependencies>
 </project>

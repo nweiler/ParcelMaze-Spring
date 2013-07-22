@@ -4,6 +4,8 @@ package com.nweiler.ParcelMaze;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Random;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * For our game "The Parcel Maze of Doom!" navigation through the maze is strictly text based.
@@ -27,6 +29,8 @@ public class Maze {
     private int monsterCount = 0;
     private static Random rand = new Random();
     
+    ApplicationContext context = new ClassPathXmlApplicationContext("com/nweiler/ParcelMaze/ParcelMaze.xml");
+    
     /**
      * Private constructor for singleton
      */
@@ -47,7 +51,9 @@ public class Maze {
     	throw new CloneNotSupportedException();
     }
 
+    
     public void createRooms(String roomDataFile) {
+        
         Scanner in = ResourceUtil.openFileScanner(roomDataFile);
         if(in == null) {
             System.out.println("File not found: " + roomDataFile);
@@ -67,6 +73,7 @@ public class Maze {
             if(hasMonster == 1) { monsterCount ++; }
         }
         in.close();
+        
         for(String name: rooms.keySet()) {
             Room room = rooms.get(name);
             Scanner lineIn = new Scanner(exitStrings.get(name));
@@ -79,6 +86,27 @@ public class Maze {
     }
         
     public void play() {
+        
+        rooms = new HashMap<String, Room>();
+        rooms.put("outside", (Room) context.getBean("outside"));
+        rooms.put("stable", (Room) context.getBean("stable"));
+        rooms.put("warroom", (Room) context.getBean("warroom"));
+        rooms.put("greathall", (Room) context.getBean("greathall"));
+        rooms.put("tunnel", (Room) context.getBean("tunnel"));
+        rooms.put("armory", (Room) context.getBean("armory"));
+        rooms.put("saferoom", (Room) context.getBean("saferoom"));
+        rooms.put("dungeon", (Room) context.getBean("dungeon"));
+        rooms.put("kitchen", (Room) context.getBean("kitchen"));
+        rooms.put("servants", (Room) context.getBean("servants"));
+        rooms.put("wstairwell", (Room) context.getBean("wstairwell"));
+        rooms.put("balcony", (Room) context.getBean("balcony"));
+        rooms.put("estairwell", (Room) context.getBean("estairwell"));
+        rooms.put("wtower", (Room) context.getBean("wtower"));
+        rooms.put("etower", (Room) context.getBean("etower"));
+        rooms.put("bedroom", (Room) context.getBean("bedroom"));
+        rooms.put("watchout", (Room) context.getBean("watchout"));
+        rooms.put("court", (Room) context.getBean("court"));       
+        
         currentRoom = rooms.get("outside");
         StdDraw.clear();
         printWelcome();
@@ -100,7 +128,8 @@ public class Maze {
             
             else {
                 while(!finished) {
-                    System.out.println("You have defeated all of the monters but you must find your way back to the entrance!");
+                    System.out.println("You have defeated all of the monters "
+                            + "but you must find your way back to the entrance!");
                     command = Parser.getCommand();
                     finished = processCommand(command);
                     if(currentRoom.getImageFilePath().equals("castle.jpg")){
@@ -111,7 +140,8 @@ public class Maze {
         }
         
         if(monsterCount == 0) {
-            System.out.println("You have defeated all of the monters and escaped the castle. YOU WIN!!!!!!");   
+            System.out.println("You have defeated all of the monters "
+                    + "and escaped the castle. YOU WIN!!!!!!");   
             System.out.println("Thank you for playing.  Goodbye."); 
             StdDraw.text(.5, .5, "YOU WIN!!!!");
         }
@@ -163,7 +193,8 @@ public class Maze {
      */
     private void printWelcome() {
         System.out.println("\nYou are standing outside a large castle.");
-        System.out.println("You must defeat the monsters inside and return from whence you came...");
+        System.out.println("You must defeat the monsters inside "
+                + "and return from whence you came...");
         System.out.println("Type 'help' if you need help.\n");
         System.out.println(currentRoom.getLongDescription());
     }
@@ -197,7 +228,8 @@ public class Maze {
 
         }
         else if (commandWord.equals("monsters")){
-            System.out.println("There are " + monsterCount + " monsters left in the castle!");
+            System.out.println("There are " + monsterCount 
+                    + " monsters left in the castle!");
         }
         // else command not recognised.
         return wantToQuit;
@@ -241,6 +273,7 @@ public class Maze {
     }
     
     public void printMonsterCount() { 
-        System.out.println("There are " + monsterCount + " monsters left in the castle!"); 
+        System.out.println("There are " + monsterCount 
+                + " monsters left in the castle!"); 
     }
 }
